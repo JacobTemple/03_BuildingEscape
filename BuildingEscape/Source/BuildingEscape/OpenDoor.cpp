@@ -33,7 +33,7 @@ void UOpenDoor::OpenDoor()
 	AActor* owner = GetOwner();
 
 	FRotator newRotator = owner->GetActorRotation();
-	newRotator.Yaw = -70.0f;
+	newRotator.Yaw = OpenAngle;
 	owner->SetActorRotation(newRotator);
 	UE_LOG(LogTemp, Warning, TEXT("Rotation is %s"), *newRotator.ToString());
 }
