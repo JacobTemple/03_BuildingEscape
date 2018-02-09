@@ -36,7 +36,28 @@ void UGrabber::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s is missing physics handle"), *GetOwner()->GetName());
 	}
+
+	/// Look for attached input component only appears at runtime
+	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (InputComponent) {
+		// input found
+
+		/// Bind the input action
+		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+		InputComponent->BindAction("Grab", IE_Released, this, &UGrabber::Release);
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("%s is missing input component"), *GetOwner()->GetName());
+	}
 	
+}
+
+void UGrabber::Grab() {
+	UE_LOG(LogTemp, Warning, TEXT("Grab"));
+}
+
+void UGrabber::Release() {
+	UE_LOG(LogTemp, Warning, TEXT("Release"));
 }
 
 
